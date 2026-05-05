@@ -17,6 +17,8 @@ Sometimes the invite email lands users on the **homepage** first (instead of `/a
 
 **Important**: URL fragments (`#invite_token=...`) are handled by the browser and can be dropped if anything does a traditional HTTP redirect chain in the middle. This repo includes an early homepage script that forwards known Identity fragments from `/` to `/admin/` to keep the signup flow reliable.
 
+The same applies to **password recovery** links (`#recovery_token=...`) — avoid email clients that rewrite links through scanners; open the recovery link directly in Safari/Chrome.
+
 ## How your client edits content
 
 1. Visit `https://your-site-domain/admin/`.
