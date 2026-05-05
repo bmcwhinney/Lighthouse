@@ -24,6 +24,26 @@
     <link rel="icon" type="image/webp" href="Lighthousechurch.webp">
     <link rel="preload" as="image" href="Lighthousechurch.webp" type="image/webp">
 
+    <!-- Netlify Identity tokens are carried in URL fragments (#invite_token=...). Avoid server redirects that strip the fragment by routing token flows to /admin/ client-side immediately. -->
+    <script>
+    (function () {
+        try {
+            if (!window.location.pathname || /^\/admin\/?$/.test(window.location.pathname)) return;
+            var hash = window.location.hash || "";
+            if (!hash || hash === "#") return;
+            var needsAdmin =
+                /invite_token=/i.test(hash) ||
+                /confirmation_token=/i.test(hash) ||
+                /recovery_token=/i.test(hash) ||
+                /access_token=/i.test(hash);
+            if (!needsAdmin) return;
+            window.location.replace("/admin/" + hash + window.location.search);
+        } catch (e) {
+            // noop
+        }
+    })();
+    </script>
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",

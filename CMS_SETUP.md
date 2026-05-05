@@ -15,6 +15,8 @@ This project now includes a client-friendly editor at `/admin`.
 
 Sometimes the invite email lands users on the **homepage** first (instead of `/admin/`). That is OK: Identity invite tokens arrive in the URL hash, and this site loads the Netlify Identity widget on both `/` and `/admin/` so the invite completion flow can finish and then redirect to `/admin/`.
 
+**Important**: URL fragments (`#invite_token=...`) are handled by the browser and can be dropped if anything does a traditional HTTP redirect chain in the middle. This repo includes an early homepage script that forwards known Identity fragments from `/` to `/admin/` to keep the signup flow reliable.
+
 ## How your client edits content
 
 1. Visit `https://your-site-domain/admin/`.
