@@ -18,6 +18,16 @@
   bundle = true
   minify = true
 
+[[redirects]]
+  from = "/admin"
+  to = "/admin/"
+  status = 301
+
+[[redirects]]
+  from = "/admin/*"
+  to = "/admin/index.html"
+  status = 200
+
 [[headers]]
   for = "/*"
   [headers.values]
@@ -34,5 +44,10 @@
 
 [[headers]]
   for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/content/*.json"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"

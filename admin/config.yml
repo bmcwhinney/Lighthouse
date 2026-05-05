@@ -1,0 +1,36 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "site"
+    label: "Site Content"
+    files:
+      - label: "Homepage Content"
+        name: "homepage"
+        file: "content/site.json"
+        format: "json"
+        fields:
+          - { label: "Welcome Heading", name: "welcome_heading", widget: "string" }
+          - { label: "Welcome Text", name: "welcome_text", widget: "text" }
+          - { label: "Event Heading", name: "event_heading", widget: "string" }
+          - { label: "Event Subheading", name: "event_subheading", widget: "string" }
+          - { label: "Event Text", name: "event_text", widget: "text" }
+          - { label: "Vision Heading", name: "vision_heading", widget: "string" }
+          - { label: "Vision Text", name: "vision_text", widget: "text" }
+          - { label: "Facebook URL", name: "facebook_url", widget: "string" }
+          - { label: "Facebook Button Text", name: "facebook_button_text", widget: "string" }
+          - { label: "Service Time", name: "service_time", widget: "string" }
+          - { label: "Service Title", name: "service_title", widget: "string" }
+          - { label: "Key Contact Line", name: "key_contact", widget: "string" }
+          - { label: "Phone Link (tel:...)", name: "phone_link", widget: "string" }
+          - { label: "Phone Display", name: "phone_display", widget: "string" }
+          - { label: "Minister Email Link (mailto:...)", name: "minister_email_link", widget: "string" }
+          - { label: "Minister Email Display", name: "minister_email_display", widget: "string" }
+          - { label: "Church Email Link (mailto:...)", name: "church_email_link", widget: "string" }
+          - { label: "Church Email Display", name: "church_email_display", widget: "string" }
+          - { label: "Visit Address", name: "visit_address", widget: "text" }
+          - { label: "Footer Text", name: "footer_text", widget: "string" }
