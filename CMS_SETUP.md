@@ -11,6 +11,10 @@ This project now includes a client-friendly editor at `/admin`.
    - Enable **Git Gateway**.
 4. Invite your client by email from the Identity tab.
 
+### Note about invitation links
+
+Sometimes the invite email lands users on the **homepage** first (instead of `/admin/`). That is OK: Identity invite tokens arrive in the URL hash, and this site loads the Netlify Identity widget on both `/` and `/admin/` so the invite completion flow can finish and then redirect to `/admin/`.
+
 ## How your client edits content
 
 1. Visit `https://your-site-domain/admin/`.

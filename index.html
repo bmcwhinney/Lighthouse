@@ -441,8 +441,35 @@
         <span id="footer-text">&copy; 2026 Lighthouse Methodist Church Walthamstow. All rights reserved.</span>
     </footer>
 
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <script>
     (function () {
+        if (window.netlifyIdentity) {
+            var hash = window.location.hash || "";
+            var hadAuthHash =
+                /invite_token|confirmation_token|recovery_token|access_token/i.test(
+                    hash
+                );
+
+            netlifyIdentity.on("init", function (user) {
+                if (!user && /invite_token/i.test(hash)) {
+                    netlifyIdentity.open("signup");
+                } else if (!user && /confirmation_token/i.test(hash)) {
+                    netlifyIdentity.open("signup");
+                } else if (!user && /recovery_token/i.test(hash)) {
+                    netlifyIdentity.open("recovery");
+                }
+            });
+
+            netlifyIdentity.on("login", function () {
+                if (hadAuthHash && !/^\/admin\/?$/.test(window.location.pathname)) {
+                    window.location.replace("/admin/");
+                }
+            });
+
+            netlifyIdentity.init();
+        }
+
         function setText(id, value) {
             if (!value) return;
             var el = document.getElementById(id);
