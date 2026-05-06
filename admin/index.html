@@ -4,55 +4,19 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lighthouse Content Manager</title>
-    <!-- Same as homepage: fragments (#recovery_token etc.) must not be lost before Identity runs -->
-    <script>
-    (function () {
-      try {
-        var path = window.location.pathname || "";
-        if (!/^\/$/.test(path)) return;
-        var hash = window.location.hash || "";
-        if (!hash || hash === "#") return;
-        var needsAdmin =
-          /invite_token=/i.test(hash) ||
-          /confirmation_token=/i.test(hash) ||
-          /recovery_token=/i.test(hash) ||
-          /access_token=/i.test(hash);
-        if (!needsAdmin) return;
-        window.location.replace("/admin/" + hash + window.location.search);
-      } catch (e) {}
-    })();
-    </script>
   </head>
   <body>
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <script>
-      (function () {
-        if (!window.netlifyIdentity) return;
-
-        var hash = window.location.hash || "";
-        var hadAuthHash =
-          /invite_token|confirmation_token|recovery_token|access_token/i.test(
-            hash
-          );
-
-        netlifyIdentity.on("init", function (user) {
-          if (!user && /invite_token/i.test(hash)) {
-            netlifyIdentity.open("signup");
-          } else if (!user && /confirmation_token/i.test(hash)) {
-            netlifyIdentity.open("signup");
-          } else if (!user && /recovery_token/i.test(hash)) {
-            netlifyIdentity.open("recovery");
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", function (user) {
+          if (!user) {
+            window.netlifyIdentity.on("login", function () {
+              document.location.href = "/admin/";
+            });
           }
         });
-
-        netlifyIdentity.on("login", function () {
-          if (hadAuthHash && !/^\/admin\/?$/.test(window.location.pathname)) {
-            window.location.replace("/admin/");
-          }
-        });
-
-        netlifyIdentity.init();
-      })();
+      }
     </script>
     <script src="https://unpkg.com/decap-cms@3.10.1/dist/decap-cms.js"></script>
   </body>
